@@ -65,6 +65,7 @@
 
                                 <div class="col-md-2" >
                                         <input type="password"  style="width: 130%" class="form-control" id="password" name="password" required />
+                                        <p style="font-size: 15px">min 6 characters</p>
                                 </div>
                                 <div class="col-md-1" >
                                     <label for="Confirm" style="padding-left: 20px" class="col-form-label">Confirm</label>
@@ -113,59 +114,52 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="Country" class="col-md-4 col-form-label text-md-right">Country</label>
+                        <label for="Address" class="col-md-4 col-form-label text-md-right">Country</label>
                         <div class="col-md-6">
-                            <input type="text" id="Country" class="form-control" name="Country" required>
-                            @if ($errors->has('Country'))
-                            <span class="text-danger">{{ $errors->first('Country') }}</span>
-                            @endif
+                            <select name="country" class="form-control" id="country">
+                                <option selected disabled>Select country</option>
+                                @foreach ($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" >
+                        <label for="Address" class="col-md-4 col-form-label text-md-right">State</label>
+                        <div class="col-md-6">
+                            <select name ="state" class="form-control"  id="state">
+                            </select>
+
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="State" class="col-md-4 col-form-label text-md-right">State</label>
+                        <label for="Address" class="col-md-4 col-form-label text-md-right">City</label>
                         <div class="col-md-6">
-                            <input type="text" id="State" class="form-control" name="State" required>
-                            @if ($errors->has('State'))
-                            <span class="text-danger">{{ $errors->first('State') }}</span>
-                            @endif
+                            <select name ="city" class="form-control" id="city">
+                            </select>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="City" class="col-md-4 col-form-label text-md-right">City</label>
-                        <div class="col-md-6">
-                            <input type="text" id="City" class="form-control" name="City" required>
-                            @if ($errors->has('City'))
-                            <span class="text-danger">{{ $errors->first('City') }}</span>
-                            @endif
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6 offset-md-4">
+                        <div class="checkbox" style="color:cornsilk;font-weight:bold;font-size:14px">
+                            <label>
+                                <input type="checkbox"  name="remember">  Agree to terms and conditions
+                            </label>
                         </div>
                     </div>
                 </div>
 
-
-
-
-                            {{-- from --}}
-
-
-                            {{-- to end --}}
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="checkbox" style="color:cornsilk;font-weight:bold;font-size:14px">
-                                        <label>
-                                            <input type="checkbox"  name="remember">  Agree to terms and conditions
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" href="login" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </form>
+                <div class="col-md-6 offset-md-4">
+                    <button type="submit" href="login" class="btn btn-primary">
+                        Register
+                    </button>
+                </div>
+            </form>
 
                     </div>
                 </div>
@@ -173,29 +167,40 @@
         </div>
     </div>
 </main>
-
 <script type="text/javascript">
-$(document).ready(function () {
-    $('#confirm').focusout(function(){
-        var pass = $('#password').val();
-        var pass2 = $('#confirm').val();
-        if(pass != pass2){
-            $('#password').val('');
-            $('#confirm').val('');
-            confirm('Password didn\'t match');
-        }
-    });
-});
-
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#password');
-
-    togglePassword.addEventListener('click', function (e) {
-        // toggle the type attribute
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        // toggle the eye slash icon
-        this.classList.toggle('bi-eye');
+    $(document).ready(function () {
+        $('#country').on('change', function () {
+            var countryId = this.value;
+            $('#state').html('');
+            $.ajax({
+                url: '{{ route('states') }}?country_id='+countryId,
+                type: 'get',
+                success: function (res) {
+                    $('#state').html('<option value="">Select State</option>');
+                    $.each(res, function (key, value) {
+                        $('#state').append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                    $('#city').html('<option value="">Select City</option>');
+                }
+            });
+        });
+        $('#state').on('change', function () {
+            var stateId = this.value;
+            $('#city').html('');
+            $.ajax({
+                url: '{{ route('cities') }}?state_id='+stateId,
+                type: 'get',
+                success: function (res) {
+                    $('#city').html('<option value="">Select City</option>');
+                    $.each(res, function (key, value) {
+                        $('#city').append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
     });
 </script>
+
 @endsection

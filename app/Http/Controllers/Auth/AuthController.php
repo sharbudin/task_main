@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Session;
 use App\Models\User;
 use Hash;
@@ -29,7 +30,29 @@ class AuthController extends Controller
      */
     public function registration()
     {
-        return view('auth.registration');
+        $countries= $this->getCountries();
+        return view('auth.registration',['countries'=>$countries]);
+    }
+
+
+    public function getCountries(){
+        $countries = DB::table('countries')->get();
+
+        return $countries;
+    }
+    public function getStates(Request $request){
+        $states = DB::table('states')->where('country_id',$request->country_id)->get();
+
+        if(count($states)>0){
+            return response()->json($states);
+        }
+    }
+    public function getCities(Request $request){
+        $cities = DB::table('cities')->where('state_id',$request->state_id)->get();
+
+        if(count($cities)>0){
+            return response()->json($cities);
+        }
     }
 
     /**
@@ -47,7 +70,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard')
-                        ->withSuccess('You have Successfully loggedin');
+                        ->withSuccess('You have Successfully logged In');
         }
 
             return redirect('login')->with('failed','Oppes! You have entered invalid credentials');
@@ -75,11 +98,11 @@ class AuthController extends Controller
 
                 'empAddress' => 'required',
 
-                'Country' => 'required',
+                'country' => 'required',
 
-                'State' => 'required',
+                'state' => 'required',
 
-                'City' => 'required',
+                'city' => 'required',
 
                 'remember' => 'required',
         ]);
@@ -87,7 +110,7 @@ class AuthController extends Controller
         $data = $request->all();
         $check = $this->create($data);
 
-        return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
+        return redirect("dashboard")->withSuccess('Great! You have Successfully logged In');
     }
 
     /**
@@ -118,9 +141,9 @@ class AuthController extends Controller
         'email' => $data['email'],
         'empGender' => $data['empGender'],
         'empAddress' => $data['empAddress'],
-        'Country' => $data['Country'],
-        'State' => $data['State'],
-        'City' => $data['City'],
+        'country' => $data['country'],
+        'state' => $data['state'],
+        'city' => $data['city'],
         'password' => Hash::make($data['password']),
         'remember' => $data['remember']
       ]);

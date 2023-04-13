@@ -25,15 +25,17 @@ class User extends Authenticatable
         'password',
         'empGender',
         'empAddress',
-        'Country',
-        'State',
-        'City',
+        'country',
+        'state',
+        'city',
         'remember'
 
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The at
+     *
+     *
      *
      * @var array<int, string>
      */
