@@ -65,7 +65,7 @@
 
                                 <div class="col-md-2" >
                                         <input type="password"  style="width: 130%" class="form-control" id="password" name="password" required />
-                                        <p style="font-size: 15px">min 6 characters</p>
+                                        <p style="color:rgba(235, 10, 10, 0.877); font-size: 15px">min 6 characters</p>
                                 </div>
                                 <div class="col-md-1" >
                                     <label for="Confirm" style="padding-left: 20px" class="col-form-label">Confirm</label>
