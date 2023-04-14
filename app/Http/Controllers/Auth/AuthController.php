@@ -23,11 +23,6 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
     public function registration()
     {
         $countries= $this->getCountries();
@@ -55,11 +50,6 @@ class AuthController extends Controller
         }
     }
 
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
     public function postLogin(Request $request)
     {
         $request->validate([
@@ -76,11 +66,6 @@ class AuthController extends Controller
             return redirect('login')->with('failed','Oppes! You have entered invalid credentials');
     }
 
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
     public function postRegistration(Request $request)
     {
         $request->validate([
@@ -107,17 +92,33 @@ class AuthController extends Controller
                 'remember' => 'required',
         ]);
 
+        
+        $selectCountry = DB::table('countries')
+        ->where('id', $request->input("country"))
+        ->get()
+        ->first();
+
+        $selectState = DB::table('states')
+                ->where('id', $request->input("state"))
+                ->get()
+                ->first();
+        $selectCity   = DB::table('cities')
+                ->where('id', $request->input("city"))
+                ->get()
+                ->first();
+
         $data = $request->all();
+
+        $data['country'] = $selectCountry->name;
+        $data['state'] = $selectState->name;
+        $data['city'] = $selectCity->name;
+
         $check = $this->create($data);
+
 
         return redirect("dashboard")->withSuccess('Great! You have Successfully logged In');
     }
 
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
     public function dashboard()
     {
         if(Auth::check()){
@@ -127,13 +128,9 @@ class AuthController extends Controller
         return redirect("login")->withSuccess('Opps! You do not have access');
     }
 
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
     public function create(array $data)
     {
+
       return User::create([
         'Employee_ID' => "SIPL".$data['Employee_ID'],
         'name' => $data['name'],
@@ -148,12 +145,6 @@ class AuthController extends Controller
         'remember' => $data['remember']
       ]);
     }
-
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
     public function logout() {
         Session::flush();
         Auth::logout();
