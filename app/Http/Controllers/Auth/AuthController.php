@@ -59,8 +59,9 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
+            return redirect()->intended('detail')
                         ->withSuccess('You have Successfully logged In');
+
         }
 
             return redirect('login')->with('failed','Oppes! You have entered invalid credentials');
@@ -92,7 +93,7 @@ class AuthController extends Controller
                 'remember' => 'required',
         ]);
 
-        
+
         $selectCountry = DB::table('countries')
         ->where('id', $request->input("country"))
         ->get()
@@ -116,13 +117,13 @@ class AuthController extends Controller
         $check = $this->create($data);
 
 
-        return redirect("dashboard")->withSuccess('Great! You have Successfully logged In');
+        return redirect("detail")->withSuccess('Great! You have Successfully logged In');
     }
 
     public function dashboard()
     {
         if(Auth::check()){
-            return view('dashboard');
+            return view('detail');
         }
 
         return redirect("login")->withSuccess('Opps! You do not have access');
