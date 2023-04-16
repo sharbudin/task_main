@@ -117,7 +117,7 @@ class AuthController extends Controller
         $check = $this->create($data);
 
 
-        return redirect("detail")->withSuccess('Great! You have Successfully logged In');
+        return redirect("login")->withSuccess('Great! You have Successfully logged In');
     }
 
     public function dashboard()
