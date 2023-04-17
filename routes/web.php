@@ -28,23 +28,7 @@ Route::get('states',[AuthController::class,'getStates'])->name('states');
 Route::get('cities',[AuthController::class,'getCities'])->name('cities');
 
 
-Route::get('/view',[AuthController::class,'view']);
-Route::post('/import',[AuthController::class,'import']);
-Route::get('/export', [AuthController::class, 'export']);
-
-Route::get('/detail',[ContactController::class,'viewdetail'])->name('detail');
-Route::post('/add-details',[ContactController::class,'adddetail'])->name('add-details');
-
-Route::get('edit-details/{id}',[ContactController::class,'editdetail']);
-Route::put('update-details',[ContactController::class,'updatedetail']);
-Route::get('delete-detail/{id}',[ContactController::class,'deletedetail']);
-
-// Route::resource('/index', ContactController::class);
-
-// Route::get('abc',[ContactController::class,'index'])->name('index');
-
-
-
+Route::resource('/contact', ContactController::class);
 
 
 

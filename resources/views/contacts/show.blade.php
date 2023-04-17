@@ -8,13 +8,14 @@
 
 
         <div class="card-body">
-        <h5 class="card-title">Employee_ID : {{ $contacts->Employee_ID }}</h5>
-        <p class="card-text">Name : {{ $contacts->Name }}</p>
-        <p class="card-text">Email : {{ $contacts->Email }}</p>
-        <p class="card-text">Password : {{ $contacts->Password }}</p>
+        <p class="card-text">Emp_ID : {{ $contacts->Emp_ID }}</p>
+        <h5 class="card-title">Name : {{ $contacts->name }}</h5>
+
+        <p class="card-text">Email: {{ $contacts->email }}</p>
+        <p class="card-text">Mobile : {{ $contacts->mobile }}</p>
   </div>
 
-   </hr>
+    </hr>
 
   </div>
 </div>

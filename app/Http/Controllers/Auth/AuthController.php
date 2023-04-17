@@ -59,7 +59,7 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('detail')
+            return redirect()->intended('/contact')
                         ->withSuccess('You have Successfully logged In');
 
         }
@@ -123,7 +123,7 @@ class AuthController extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            return view('detail');
+            return view('/contact');
         }
 
         return redirect("login")->withSuccess('Opps! You do not have access');

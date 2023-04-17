@@ -1,16 +1,13 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    protected $table = 'Contacts';
+    protected $table = 'contacts';
     protected $primaryKey = 'id';
-    protected $fillable = [ 'id',
-                            'Employee_ID',
-                            'name',
-                            'email',
-                            'password'
-                        ];
+    protected $fillable = ['Emp_ID', 'name', 'email','mobile'];
 }
