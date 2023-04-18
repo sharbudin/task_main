@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Excel;
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ContactController;
@@ -29,6 +30,11 @@ Route::get('cities',[AuthController::class,'getCities'])->name('cities');
 
 
 Route::resource('/contact', ContactController::class);
+
+
+Route::get('/file-import',[ContactController::class,'importView'])->name('import-view');
+Route::post('/import',[ContactController::class,'import'])->name('import');
+Route::get('/export-users',[ContactController::class,'exportUsers'])->name('export-users');
 
 
 

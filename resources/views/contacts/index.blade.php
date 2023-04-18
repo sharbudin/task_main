@@ -5,11 +5,22 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Contacts</div>
+                    <div class="card-header" style="background-color:DodgerBlue;"><b>Contacts</b></div>
                     <div class="card-body">
-                        <a href="{{ url('/contact/create') }}" class="btn btn-success btn-sm" title="Add New Contact">
+                        <a href="{{ url('/contact/create') }}" class="btn btn-outline-primary" title="Add New Contact">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
+                        <a href="{{ url('/contact/create') }}" class="btn btn-outline-success" title="Add New Contact">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Import
+                        </a>
+                        <a href="{{ url('/contact/create') }}" class="btn btn-outline-success" title="Add New Contact">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Export
+                        </a>
+
+                        <a href="{{ url('/contact/create') }}" class="btn btn-outline-danger" title="Add New Contact">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Reset All
+                        </a>
+
                         <br/>
                         <br/>
                         <div class="table-responsive">
