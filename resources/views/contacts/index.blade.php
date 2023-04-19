@@ -43,7 +43,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Id</th>
                         {{-- <th>ID</th> --}}
                         <th>Image</th>
                         <th>Name</th>
@@ -65,9 +65,7 @@
                         <td>{{ $item->product_desc }}</td>
                         <td>{{ $item->product_stock }}</td>
                         <td>{{ $item->product_is_active }}</td>
-                        {{-- <td>{{ $item->product_name }}</td>
-                        <td>{{ $item->customer_email }}</td>
-                        <td>{{ $item->customer_mobile }}</td> --}}
+                        
 
                         <td>
                             <a href="{{ url('/contact/' . $item->id) }}" title="View Student"><button

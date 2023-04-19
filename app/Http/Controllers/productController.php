@@ -29,7 +29,7 @@ class productController extends Controller
     {
         $input = $request->all();
         product::create($input);
-        return redirect('product')->with('flash_message', 'product Addedd!');
+        return redirect('contact')->with('flash_message', 'product Addedd!');
     }
 
 
@@ -88,6 +88,7 @@ public function import(Request $request){
 public function exportUsers(Request $request){
     return Excel::download(new ExportUser, 'users.xlsx');
 }
+
 
 }
 
