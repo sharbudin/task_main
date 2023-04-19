@@ -2,19 +2,17 @@
 
 namespace App\Imports;
 
-use App\Models\User;
+
+use App\Models\Contact;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class ImportUser implements ToModel
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+
     public function model(array $row)
     {
-        return new User([
+        return new Contact([
 
             'Emp_ID' => $row[0],
             'name' => $row[1],

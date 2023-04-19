@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Excel;
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\productController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +31,26 @@ Route::get('states',[AuthController::class,'getStates'])->name('states');
 Route::get('cities',[AuthController::class,'getCities'])->name('cities');
 
 
-Route::resource('/contact', ContactController::class);
 
 
-Route::get('/file-import',[ContactController::class,'importView'])->name('import-view');
-Route::post('/import',[ContactController::class,'import'])->name('import');
-Route::get('/export-users',[ContactController::class,'exportUsers'])->name('export-users');
+Route::resource('/contact', productController::class);
+Route::get('/file-import',[productController::class,'importView'])->name('import-view');
+Route::post('/import',[productController::class,'import'])->name('import');
+Route::get('/export-users',[productController::class,'exportUsers'])->name('export-users');
+Route::get('/delete-articles', [productController::class,'trunc'])->name('trunc');
+
+// Route::resource('/contact', ContactController::class);
+// Route::get('/file-import',[ContactController::class,'importView'])->name('import-view');
+// Route::post('/import',[ContactController::class,'import'])->name('import');
+// Route::get('/export-users',[ContactController::class,'exportUsers'])->name('export-users');
+// Route::get('/delete-articles', [ContactController::class,'trunc'])->name('trunc');
+
+
+
+
+
+
+
 
 
 

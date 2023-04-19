@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 // use App\Http\Controllers\Excel;
 use App\Imports\ImportUser;
 use App\Exports\ExportUser;
-use App\Models\Contact;
+use App\Models\product;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
 
-class ContactController extends Controller
+class productController extends Controller
 {
 
     public function index()
     {
-        $contacts = Contact::all();
-      return view ('contacts.index')->with('contacts', $contacts);
+        $products = product::all();
+      return view ('contacts.index')->with('products', $products);
     }
 
 
@@ -28,45 +28,45 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        Contact::create($input);
-        return redirect('contact')->with('flash_message', 'Contact Addedd!');
+        product::create($input);
+        return redirect('product')->with('flash_message', 'product Addedd!');
     }
 
 
     public function show($id)
     {
-        $contact = Contact::find($id);
-        return view('contacts.show')->with('contacts', $contact);
+        $product = product::find($id);
+        return view('contacts.show')->with('products', $product);
     }
 
 
     public function edit($id)
     {
-        $contact = Contact::find($id);
-        return view('contacts.edit')->with('contacts', $contact);
+        $product = product::find($id);
+        return view('contacts.edit')->with('products', $product);
     }
 
 
     public function update(Request $request, $id)
     {
-        $contact = Contact::find($id);
+        $product = product::find($id);
         $input = $request->all();
-        $contact->update($input);
-        return redirect('contact')->with('flash_message', 'Contact Updated!');
+        $product->update($input);
+        return redirect('product')->with('flash_message', 'product Updated!');
     }
 
 
     public function destroy($id)
     {
-        Contact::destroy($id);
-        return redirect('contact')->with('flash_message', 'Contact deleted!');
+        product::destroy($id);
+        return redirect('product')->with('flash_message', 'product deleted!');
     }
 
     public function trunc()
     {
-        DB::table('contacts')->truncate();
+        DB::table('products')->truncate();
 
-        return redirect('contact')->with('flash_message', 'Reset successed!');
+        return redirect('product')->with('flash_message', 'Reset successed!');
     }
 
 // import and export
@@ -90,3 +90,4 @@ public function exportUsers(Request $request){
 }
 
 }
+
