@@ -68,10 +68,10 @@
                                         <p style="color:rgba(235, 10, 10, 0.877); font-size: 15px">min 6 characters</p>
                                 </div>
                                 <div class="col-md-1" >
-                                    <label for="Confirm" style="padding-left: 20px" class="col-form-label">Confirm</label>
+                                    <label for="Confirm"  class="col-form-label">Confirm</label>
                                 </div>
-                                <div class="col-md-3" style="padding-left: 30px;width:100%">
-                                    <input type="password" id="confirm" style="padding-left: 20px;width:100%" class="form-control" name="Confirm" required>
+                                <div class="col-md-3" style="padding-left: 40px;width:100%">
+                                    <input type="password" id="confirm" style="width:100%" class="form-control" name="Confirm" required>
 
                                     @if ($errors->has('Confirm'))
                                     <span class="text-danger">{{ $errors->first('Confirm') }}</span>

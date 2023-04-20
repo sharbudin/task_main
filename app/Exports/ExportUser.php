@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Contact;
+use App\Models\product;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class ExportUser implements FromCollection
@@ -10,6 +10,6 @@ class ExportUser implements FromCollection
 
     public function collection()
     {
-        return Contact::select('Emp_ID','name','email','mobile')->get();
+        return product::select('id','product_img', 'product_name', 'product_cost', 'product_desc', 'product_stock', 'product_is_active')->get();
     }
 }

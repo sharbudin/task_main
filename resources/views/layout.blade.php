@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel - ItSolutionStuff.com</title>
+    <title>sharbudin laravel project</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -19,12 +19,16 @@
             text-align: left;
             background-color: #f9f9fb;
             background-image: url("{{asset('image/gray.jpg')}}");
+            background-repeat: no-repeat;
+            background-size: cover;
+
+
 
         }
         .navbar-laravel
         {
             box-shadow: 0 2px 4px rgba(0,0,0,.04);
-            
+
         }
         .navbar-brand , .nav-link, .my-form, .login-form
         {
@@ -52,6 +56,7 @@
         }
         .body-image{
             background-image: url("{{asset('image/gray_wall.jpg')}}");
+
             background: cover;
             opacity: 0.9;
         }

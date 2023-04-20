@@ -28,6 +28,9 @@ class productController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        if($request->input('product_img') == NULL) {
+            $input['product_img'] = 'default.jpg';
+        }
         product::create($input);
         return redirect('contact')->with('flash_message', 'product Addedd!');
     }
@@ -43,6 +46,9 @@ class productController extends Controller
     public function edit($id)
     {
         $product = product::find($id);
+        if($product->product_img == NULL || $product->product_img == 'default.jpg') {
+            $product->product_img = 'default.jpg';
+        }
         return view('contacts.edit')->with('products', $product);
     }
 
@@ -51,22 +57,25 @@ class productController extends Controller
     {
         $product = product::find($id);
         $input = $request->all();
+        if($request->input('product_img') == NULL) {
+            $input['product_img'] = 'default.jpg';
+        }
         $product->update($input);
-        return redirect('product')->with('flash_message', 'product Updated!');
+        return redirect('contact')->with('flash_message', 'product Updated!');
     }
 
 
     public function destroy($id)
     {
         product::destroy($id);
-        return redirect('product')->with('flash_message', 'product deleted!');
+        return redirect('contact')->with('flash_message', 'product deleted!');
     }
 
     public function trunc()
     {
         DB::table('products')->truncate();
 
-        return redirect('product')->with('flash_message', 'Reset successed!');
+        return redirect('contact')->with('flash_message', 'Reset successed!');
     }
 
 // import and export

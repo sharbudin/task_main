@@ -7,12 +7,14 @@
   <div class="card-body">
 
         <div class="card-body">
-        <p class="card-text">Image : {{ $products->product_img }}</p>
+        <img src="{{asset('image/'.$products->product_img)}}" alt="" style="width: 200px;height:200px">
+        <br><br>
         <h5 class="card-title">Name : {{ $products->product_name }}</h5>
         <p class="card-text">Cost : {{ $products->product_cost }}</p>
         <p class="card-text">Description : {{ $products->product_desc }}</p>
         <p class="card-text">Stock# : {{ $products->product_stock }}</p>
         <p class="card-text">Status: {{ $products->product_is_active }}</p>
+        <a class="btn btn-dark" href="{{ url('/contact') }}"><b>Back</b></a>
   </div>
 
     </hr>

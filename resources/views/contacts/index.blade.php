@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Contact Laravel 8 CRUD</title>
+    <title>Product detail page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
@@ -20,7 +20,8 @@
 
 </style>
 <div class="card">
-    <div class="card-header" style="background-color:DodgerBlue;"><b>Products</b></div>
+    <div class="card-header d-flex justify-content-between" style="background-color:DodgerBlue; font-size:20px;"> <b>Products</b><a href="{{ url('login')  }}" type="button" class="btn btn btn-warning">Logout</a></div>
+
     <div class="card-body">
         <a href="{{ url('/contact/create') }}" class="btn btn-outline-primary" title="Add New Contact">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
@@ -65,7 +66,7 @@
                         <td>{{ $item->product_desc }}</td>
                         <td>{{ $item->product_stock }}</td>
                         <td>{{ $item->product_is_active }}</td>
-                        
+
 
                         <td>
                             <a href="{{ url('/contact/' . $item->id) }}" title="View Student"><button
@@ -89,6 +90,7 @@
                 </tbody>
             </table>
         </div>
+
 
     </div>
 </div>
