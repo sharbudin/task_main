@@ -61,21 +61,21 @@ class productController extends Controller
             $input['product_img'] = 'default.jpg';
         }
         $product->update($input);
-        return redirect('contact')->with('flash_message', 'product Updated!');
+        return redirect('contact')->with('flash_message','product Updated!');
     }
 
 
     public function destroy($id)
     {
         product::destroy($id);
-        return redirect('contact')->with('flash_message', 'product deleted!');
+        return redirect('contact')->with('flash_message','product deleted!');
     }
 
     public function trunc()
     {
         DB::table('products')->truncate();
 
-        return redirect('contact')->with('flash_message', 'Reset successed!');
+        return redirect('contact')->with('flash_message','Reset successed!');
     }
 
 // import and export
