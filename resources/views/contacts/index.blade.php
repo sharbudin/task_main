@@ -4,7 +4,7 @@
     <title>Product detail page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color: rgb(208, 240, 230)">
 
 <style>
     .card {
@@ -20,9 +20,9 @@
 
 </style>
 <div class="card">
-    <div class="card-header d-flex justify-content-between" style="background-color:DodgerBlue; font-size:20px;"> <b>Products</b><a href="{{ url('login')  }}" type="button" class="btn btn btn-warning">Logout</a></div>
+    <div class="card-header d-flex justify-content-between" style="background-color:rgb(217, 226, 168); font-size:20px;"> <b>Products</b><a href="{{ url('login')  }}" type="button" class="btn btn btn-warning">Logout</a></div>
 
-    <div class="card-body">
+    <div class="card-body" style="background-color: rgb(218, 217, 208)">
         <a href="{{ url('/contact/create') }}" class="btn btn-outline-primary" title="Add New Contact">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
         </a>
