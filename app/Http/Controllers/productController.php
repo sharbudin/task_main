@@ -31,6 +31,12 @@ class productController extends Controller
         if($request->input('product_img') == NULL) {
             $input['product_img'] = 'default.jpg';
         }
+        if($request->input('product_is_active') == 1) {
+            $input['product_is_active'] = 'Available';
+        }
+        if($request->input('product_is_active') == 0) {
+            $input['product_is_active'] = 'Not Available';
+        }
         product::create($input);
         return redirect('contact')->with('flash_message', 'product Addedd!');
     }
@@ -60,6 +66,13 @@ class productController extends Controller
         if($request->input('product_img') == NULL) {
             $input['product_img'] = 'default.jpg';
         }
+        if($request->input('product_is_active') == 1) {
+            $input['product_is_active'] = 'Available';
+        }
+        if($request->input('product_is_active') == 0) {
+            $input['product_is_active'] = 'Not Available';
+        }
+
         $product->update($input);
         return redirect('contact')->with('flash_message','product Updated!');
     }
