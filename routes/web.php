@@ -7,6 +7,7 @@ use App\Http\Controllers\productController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ use App\Http\Controllers\productController;
 |
 */
 
-Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
 Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post');
@@ -38,17 +39,7 @@ Route::post('/import',[productController::class,'import'])->name('import');
 Route::get('/export-users',[productController::class,'exportUsers'])->name('export-users');
 Route::get('/delete-articles', [productController::class,'trunc'])->name('trunc');
 
-// Route::resource('/contact', ContactController::class);
-// Route::get('/file-import',[ContactController::class,'importView'])->name('import-view');
-// Route::post('/import',[ContactController::class,'import'])->name('import');
-// Route::get('/export-users',[ContactController::class,'exportUsers'])->name('export-users');
-// Route::get('/delete-articles', [ContactController::class,'trunc'])->name('trunc');
-
-
-
-
-
-
+Route::get('/downloadprint', [productController::class,'print'])->name('downloadprint');
 
 
 

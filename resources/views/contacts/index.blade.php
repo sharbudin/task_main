@@ -65,7 +65,11 @@
                         <td>{{ $item->product_cost }}</td>
                         <td>{{ $item->product_desc }}</td>
                         <td>{{ $item->product_stock }}</td>
-                        <td>{{ $item->product_is_active }}</td>
+                        @if ($item->product_is_active)
+                        <td>Available</td>
+                        @else
+                        <td>Not Available</td>
+                        @endif
 
 
                         <td>

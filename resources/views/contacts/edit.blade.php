@@ -18,7 +18,7 @@
         <input type="text" name="product_cost" id="product_cost" value="{{$products->product_cost}}" class="form-control"></br>
         <label>Description</label></br>
         <input type="text" name="product_desc" id="product_desc" value="{{$products->product_desc}}" class="form-control"></br>
-        <label>Stock#</label></br>
+        <label>Stock</label></br>
         <input type="text" name="product_stock" id="product_stock" value="{{$products->product_stock}}" class="form-control"></br>
         <label>Status</label>
         @if ($products->product_is_active == 1)
@@ -49,7 +49,8 @@
         </div>
         @endif
         <br><br>
-        <input type="submit" value="Update" class="btn btn-success"></br>
+        <div><input type="submit" value="Update" class="btn btn-success"> <a class="btn btn-dark" href="{{ url('/contact') }}"><b>Back</b></a></p></div>
+
     </form>
 
   </div>

@@ -8,6 +8,10 @@ use App\Models\product;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
+use PDF;
+
+
+
 
 class productController extends Controller
 {
@@ -30,12 +34,6 @@ class productController extends Controller
         $input = $request->all();
         if($request->input('product_img') == NULL) {
             $input['product_img'] = 'default.jpg';
-        }
-        if($request->input('product_is_active') == 1) {
-            $input['product_is_active'] = 'Available';
-        }
-        if($request->input('product_is_active') == 0) {
-            $input['product_is_active'] = 'Not Available';
         }
         product::create($input);
         return redirect('contact')->with('flash_message', 'product Addedd!');
@@ -65,12 +63,6 @@ class productController extends Controller
         $input = $request->all();
         if($request->input('product_img') == NULL) {
             $input['product_img'] = 'default.jpg';
-        }
-        if($request->input('product_is_active') == 1) {
-            $input['product_is_active'] = 'Available';
-        }
-        if($request->input('product_is_active') == 0) {
-            $input['product_is_active'] = 'Not Available';
         }
 
         $product->update($input);
@@ -111,6 +103,31 @@ public function exportUsers(Request $request){
     return Excel::download(new ExportUser, 'users.xlsx');
 }
 
+public function downloadpdf(){
+    // $data =array($product);
+    $pdf = PDF::loadView('contacts.print');
+    return $pdf->download('invoice.pdf');
+
+}
+
+public function print($id) {
+
+    $data = DB::table('product')
+                ->where('id', $id)
+                ->get()
+                ->first();
+
+    $print_data = [
+        'product_img'       => $data->product_img,
+        'product_name'        => $data->product_name,
+        'product_cost'        => $data->product_cost,
+        'product_desc'        => $data->product_desc,
+        'product_stock'        => $data->product_stock,
+        'product_is_active'     => $data->product_is_active
+    ];
+    $pdf = PDF::loadView('contacts.show', $print_data);
+    return $pdf->download($data->product_img."_".$data->id.'.pdf');
+}
 
 }
 

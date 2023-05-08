@@ -17,8 +17,8 @@ class ImportUser implements ToModel
 
         $count = product::where('id',$row[0])->first();
 
-        if(!isset($count)) {
-            if(isset($row[6])) {
+        if(isset($count)) {
+            if(!isset($row[6])) {
                 $row[6] = 0;
             }
 
