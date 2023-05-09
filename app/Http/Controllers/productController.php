@@ -6,7 +6,9 @@ use App\Imports\ImportUser;
 use App\Exports\ExportUser;
 use App\Models\product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Http;
 use DB;
 use PDF;
 
@@ -25,6 +27,7 @@ class productController extends Controller
 
     public function create()
     {
+
         return view('contacts.create');
     }
 
@@ -32,11 +35,18 @@ class productController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if($request->input('product_img') == NULL) {
+        if ($request->hasFile('product_img')) {
+            $file = $request->file('product_img');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/images', $fileName);
+            $input['product_img']=$fileName;
+
+        } else {
             $input['product_img'] = 'default.jpg';
         }
         product::create($input);
-        return redirect('contact')->with('flash_message', 'product Addedd!');
+        return redirect('contact')->with('flash_message', 'product Added!');
+
     }
 
 
@@ -61,7 +71,13 @@ class productController extends Controller
     {
         $product = product::find($id);
         $input = $request->all();
-        if($request->input('product_img') == NULL) {
+        if ($request->hasFile('product_img')) {
+            $file = $request->file('product_img');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/images', $fileName);
+            $input['product_img']=$fileName;
+
+        } else {
             $input['product_img'] = 'default.jpg';
         }
 
@@ -104,30 +120,54 @@ public function exportUsers(Request $request){
 }
 
 public function downloadpdf(){
+
+    $product = product::all();
+    $products=array($product);
+    view()->share('products', $products);
+    $pdf = PDF::loadView('contacts.show', $products);
+    return $pdf->download('download.pdf');
+
     // $data =array($product);
-    $pdf = PDF::loadView('contacts.print');
-    return $pdf->download('invoice.pdf');
+    // $pdf = PDF::loadView('contacts.print');
+    // return $pdf->download('invoice.pdf');
 
 }
 
-public function print($id) {
+// public function print($id) {
 
-    $data = DB::table('product')
-                ->where('id', $id)
-                ->get()
-                ->first();
+//     $data = DB::table('product')
+//                 ->where('id', $id)
+//                 ->get()
+//                 ->first();
 
-    $print_data = [
-        'product_img'       => $data->product_img,
-        'product_name'        => $data->product_name,
-        'product_cost'        => $data->product_cost,
-        'product_desc'        => $data->product_desc,
-        'product_stock'        => $data->product_stock,
-        'product_is_active'     => $data->product_is_active
-    ];
-    $pdf = PDF::loadView('contacts.show', $print_data);
-    return $pdf->download($data->product_img."_".$data->id.'.pdf');
+//     $print_data = [
+//         'product_img'       => $data->product_img,
+//         'product_name'        => $data->product_name,
+//         'product_cost'        => $data->product_cost,
+//         'product_desc'        => $data->product_desc,
+//         'product_stock'        => $data->product_stock,
+//         'product_is_active'     => $data->product_is_active
+//     ];
+//     $pdf = PDF::loadView('contacts.show', $print_data);
+//     return $pdf->download($data->product_img."_".$data->id.'.pdf');
+// }
+
+public function pdfview(Request $request,$id)
+
+    {
+        $product = product::find($id);
+        $items = DB::table("products")->where('id',$id)->get();
+        view()->share('products',$items)->with('products', $product);
+
+
+        if($request->has('download')){
+            $pdf = PDF::loadView('contacts.show');
+            return $pdf->download('pdfview.pdf');
+        }
+
+
+        return view('pdfview');
+
 }
 
 }
-

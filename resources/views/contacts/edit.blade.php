@@ -5,13 +5,13 @@
   <div class="card-header">Products Page</div>
   <div class="card-body">
 
-      <form action="{{ url('contact/' .$products->id) }}" method="post">
+      <form action="{{ url('contact/' .$products->id) }}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
         @method("PATCH")
         <input type="hidden" name="id" id="id" value="{{$products->id}}" id="id" />
         <label></label></br>
         <label>Image</label></br>
-        <input type="file" name="product_img" id="product_img" value="{{$products->product_img}}" class="form-control"></br>
+        <input type="file" name="product_img" id="product_img"  class="form-control"></br>
         <label>Name</label></br>
         <input type="text" name="product_name" id="product_name" value="{{$products->product_name}}" class="form-control"></br>
         <label>Cost</label></br>

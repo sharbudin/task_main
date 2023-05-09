@@ -5,7 +5,7 @@
   <div class="card-header">Products Page</div>
   <div class="card-body">
 
-      <form action="{{ url('contact') }}" method="post">
+      <form action="{{ url('contact') }}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <label>Image</label></br>
         <input type="file" name="product_img" id="product_img" class="form-control"></br>

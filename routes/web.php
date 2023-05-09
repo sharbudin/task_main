@@ -39,7 +39,7 @@ Route::post('/import',[productController::class,'import'])->name('import');
 Route::get('/export-users',[productController::class,'exportUsers'])->name('export-users');
 Route::get('/delete-articles', [productController::class,'trunc'])->name('trunc');
 
-Route::get('/downloadprint', [productController::class,'print'])->name('downloadprint');
+Route::get('/downloadprint', [productController::class,'downloadpdf'])->name('downloadprint');
 
 
 
